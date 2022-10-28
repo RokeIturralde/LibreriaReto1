@@ -4,6 +4,6 @@ public enum ResponseType{
     OK,
     LOGIN_CREDENTIAL_ERROR,
     SERVER_ERROR,
-    USERNAME_ERROR,
-    EMAIL_ERROR
+    DATABASE_ERROR,
+    USER_ERROR
 }
