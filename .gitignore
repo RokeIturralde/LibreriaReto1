@@ -32,4 +32,4 @@ nbproject/**
 .vscode/**
 lib/nblibraries.properties
 /dist/
-/build/
+/build/**
