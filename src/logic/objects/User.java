@@ -31,7 +31,7 @@ public class User implements Comparable<User>, Serializable {
             String pEmail,
             String pFullName,
             String pPassword,
-            int pLastPasswordChange,
+            Timestamp pLastPasswordChange,
             int pStatus,
             int pPrivilege,
             List<Timestamp> pLastLogins) {
