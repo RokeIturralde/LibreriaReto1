@@ -32,4 +32,8 @@ nbproject/**
 .vscode/**
 lib/nblibraries.properties
 /dist/
+<<<<<<< HEAD
 /build/**
+=======
+/build/
+>>>>>>> 5e8a9ad7fb5db2a294a24d6c4c8bcc7556492b33
