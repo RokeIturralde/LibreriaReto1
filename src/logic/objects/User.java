@@ -164,8 +164,7 @@ public class User implements Comparable<User>, Serializable {
             return false;
 
         User usr = (User) obj;
-        return ID == usr.getID()
-                && login.equals(usr.getLogin())
+        return login.equals(usr.getLogin())
                 && email.equals(usr.getEmail())
                 && privilege.equals(usr.getPrivilege());
     }
