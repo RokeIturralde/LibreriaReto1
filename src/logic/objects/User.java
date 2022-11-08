@@ -144,6 +144,15 @@ public class User implements Comparable<User>, Serializable {
     }
 
     public void setLastLogins(List<Timestamp> pLastLogins) {
+        pLastLogins.sort((t1, t2) -> 
+                t1.compareTo(t2));
+                
+        if (!pLastLogins.isEmpty() || pLastLogins.size() <= 10) 
+            lastLogins = pLastLogins;
+        else 
+            pLastLogins.removeIf(t -> 
+                pLastLogins.indexOf(t) < pLastLogins.size() - 10);
+
         lastLogins = pLastLogins;
     }
 
@@ -164,8 +173,7 @@ public class User implements Comparable<User>, Serializable {
             return false;
 
         User usr = (User) obj;
-        return ID == usr.getID()
-                && login.equals(usr.getLogin())
+        return login.equals(usr.getLogin())
                 && email.equals(usr.getEmail())
                 && privilege.equals(usr.getPrivilege());
     }
