@@ -35,6 +35,15 @@ public class User implements Comparable<User>, Serializable {
             int pStatus,
             int pPrivilege,
             List<Timestamp> pLastLogins) {
+       
+        ID = pID;
+        login = pLogin;
+        email = pEmail;
+        fullName = pFullName;
+        password = pPassword;
+        lastPasswordChange = pLastPasswordChange;
+        lastLogins = pLastLogins;
+                
 
         status
                 = (pStatus == 1) ? UserStatus.ENABLED : UserStatus.DISABLED;
@@ -140,6 +149,9 @@ public class User implements Comparable<User>, Serializable {
 
     private String lastLoginString() {
         String ls = "";
+        if (lastLogins == null)
+            return "There are no last logins.";
+
         lastLogins
                 .stream()
                 .forEach(t -> ls.concat("\n" + t.toString()));
@@ -148,9 +160,8 @@ public class User implements Comparable<User>, Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof User)) {
+        if (obj == null || !(obj instanceof User)) 
             return false;
-        }
 
         User usr = (User) obj;
         return ID == usr.getID()
@@ -166,12 +177,16 @@ public class User implements Comparable<User>, Serializable {
 
     @Override
     public String toString() {
+        String lastPasswordString = "null";
+        if (lastPasswordChange != null)
+            lastPasswordString += lastPasswordChange.toString();
+
         return "ID: " + ID
                 + "\nLogin: " + login
                 + "\nEmail: " + email
                 + "\nFull Name: " + fullName
-                + "\nLast password change: " + lastPasswordChange.toString()
-                + "\nStatus:" + status.toString()
+                + "\nLast password change: " + lastPasswordString
+                + "\nStatus: " + status
                 + "\nPrivilege: " + privilege
                 + "\nLast login: " + lastLoginString();
     }
