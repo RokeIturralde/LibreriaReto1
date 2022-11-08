@@ -16,7 +16,8 @@ public class LoginCredentialException extends Exception {
      * detail message.
      */
     public LoginCredentialException() {
-        super("Error in the credentials");
+
+        super("This User doesn't exist in our database, try to sign up first");
     }
 
     /**
