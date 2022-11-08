@@ -2,6 +2,7 @@ package logic.objects;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Comparable<User>, Serializable {
@@ -42,7 +43,7 @@ public class User implements Comparable<User>, Serializable {
         fullName = pFullName;
         password = pPassword;
         lastPasswordChange = pLastPasswordChange;
-        lastLogins = pLastLogins;
+        setLastLogins(pLastLogins);
                 
 
         status
@@ -70,7 +71,7 @@ public class User implements Comparable<User>, Serializable {
         this.lastPasswordChange = pLastPasswordChange;
         this.status = pStatus;
         this.privilege = pPrivilege;
-        this.lastLogins = pLastLogins;
+        setLastLogins(pLastLogins);
     }
 
     // Getters.
@@ -144,12 +145,13 @@ public class User implements Comparable<User>, Serializable {
     }
 
     public void setLastLogins(List<Timestamp> pLastLogins) {
+        if (pLastLogins == null)
+               lastLogins = new ArrayList <> ();
+        
         pLastLogins.sort((t1, t2) -> 
                 t1.compareTo(t2));
                 
-        if (!pLastLogins.isEmpty() || pLastLogins.size() <= 10) 
-            lastLogins = pLastLogins;
-        else 
+        if (10 < pLastLogins.size())
             pLastLogins.removeIf(t -> 
                 pLastLogins.indexOf(t) < pLastLogins.size() - 10);
 
