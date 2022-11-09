@@ -14,6 +14,11 @@ public class Response implements Serializable {
         this.responseType = pResponseType;
     }
 
+    public Response() {
+    }
+    
+    
+
     // Getters.
     public User getUser() {
         return user;
