@@ -17,8 +17,6 @@ public class Response implements Serializable {
     public Response() {
     }
     
-    
-
     // Getters.
     public User getUser() {
         return user;
