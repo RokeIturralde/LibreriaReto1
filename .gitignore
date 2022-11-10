@@ -33,3 +33,5 @@ nbproject/**
 lib/**
 /dist/**
 /build/**
+/build/
+/dist/

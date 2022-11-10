@@ -2,6 +2,7 @@ package logic.objects;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Comparable<User>, Serializable {
@@ -42,7 +43,7 @@ public class User implements Comparable<User>, Serializable {
         fullName = pFullName;
         password = pPassword;
         lastPasswordChange = pLastPasswordChange;
-        lastLogins = pLastLogins;
+        setLastLogins(pLastLogins);
                 
 
         status
@@ -70,7 +71,7 @@ public class User implements Comparable<User>, Serializable {
         this.lastPasswordChange = pLastPasswordChange;
         this.status = pStatus;
         this.privilege = pPrivilege;
-        this.lastLogins = pLastLogins;
+        setLastLogins(pLastLogins);
     }
 
     // Getters.
@@ -144,6 +145,16 @@ public class User implements Comparable<User>, Serializable {
     }
 
     public void setLastLogins(List<Timestamp> pLastLogins) {
+        if (pLastLogins == null)
+               lastLogins = new ArrayList <> ();
+        
+        pLastLogins.sort((t1, t2) -> 
+                t1.compareTo(t2));
+                
+        if (10 < pLastLogins.size())
+            pLastLogins.removeIf(t -> 
+                pLastLogins.indexOf(t) < pLastLogins.size() - 10);
+
         lastLogins = pLastLogins;
     }
 
@@ -164,8 +175,7 @@ public class User implements Comparable<User>, Serializable {
             return false;
 
         User usr = (User) obj;
-        return ID == usr.getID()
-                && login.equals(usr.getLogin())
+        return login.equals(usr.getLogin())
                 && email.equals(usr.getEmail())
                 && privilege.equals(usr.getPrivilege());
     }
@@ -177,15 +187,11 @@ public class User implements Comparable<User>, Serializable {
 
     @Override
     public String toString() {
-        String lastPasswordString = "null";
-        if (lastPasswordChange != null)
-            lastPasswordString += lastPasswordChange.toString();
-
-        return "ID: " + ID
+       return "ID: " + ID
                 + "\nLogin: " + login
                 + "\nEmail: " + email
                 + "\nFull Name: " + fullName
-                + "\nLast password change: " + lastPasswordString
+                + "\nLast password change: " + lastPasswordChange
                 + "\nStatus: " + status
                 + "\nPrivilege: " + privilege
                 + "\nLast login: " + lastLoginString();
