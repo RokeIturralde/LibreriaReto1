@@ -187,15 +187,11 @@ public class User implements Comparable<User>, Serializable {
 
     @Override
     public String toString() {
-        String lastPasswordString = "null";
-        if (lastPasswordChange != null)
-            lastPasswordString += lastPasswordChange.toString();
-
-        return "ID: " + ID
+       return "ID: " + ID
                 + "\nLogin: " + login
                 + "\nEmail: " + email
                 + "\nFull Name: " + fullName
-                + "\nLast password change: " + lastPasswordString
+                + "\nLast password change: " + lastPasswordChange
                 + "\nStatus: " + status
                 + "\nPrivilege: " + privilege
                 + "\nLast login: " + lastLoginString();
