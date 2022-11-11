@@ -1,5 +1,9 @@
 package logic.objects.message.types;
 
+/**
+ * @author dani y roke
+ */
+
 public enum ResponseType {
     OK,
     LOGIN_CREDENTIAL_ERROR,

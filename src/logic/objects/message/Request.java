@@ -5,19 +5,30 @@ import java.io.Serializable;
 import logic.objects.User;
 import logic.objects.message.types.RequestType;
 
+/**
+ * @author dani
+ */
+
 public class Request implements Serializable {
 
     private User user;
     private RequestType requestType;
 
-    public Request(User pUser, RequestType pRequestType) {
-        this.user = pUser;
-        this.requestType = pRequestType;
+    /**
+     * @param user user to be sent
+     * @param requestType operation to be executed
+     */
+
+    public Request(User user, RequestType requestType) {
+        this.user = user;
+        this.requestType = requestType;
     }
 
-    public Request() {
-
-    }
+    /**
+     * empty constructor
+     */
+    
+    public Request() {}
 
     // Getters.
     public User getUser() {

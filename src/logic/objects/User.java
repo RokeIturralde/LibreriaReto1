@@ -5,6 +5,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author dani
+ */
+
 public class User implements Comparable<User>, Serializable {
 
     private int ID;
@@ -17,61 +21,76 @@ public class User implements Comparable<User>, Serializable {
     private UserPrivilege privilege;
     private List<Timestamp> lastLogins;
 
-    public User(String pLogin, String pPassword) {
-        login = pLogin;
-        password = pPassword;
+    /**
+     * constructor used in client, only credentials
+     * @param login username
+     * @param password user "secret" password
+     */
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
-    public User() {
+    public User() {}
 
-    }
+    /**
+     * constructor with all the parameters.
+     * @param status is an integer, meaning 1 enabled,
+     * 0 or something else disabled
+     * @param privilege is an integer, meaning 1 administrator,
+     * 0 or something else disabled
+     */
 
     public User(
-            int pID,
-            String pLogin,
-            String pEmail,
-            String pFullName,
-            String pPassword,
-            Timestamp pLastPasswordChange,
-            int pStatus,
-            int pPrivilege,
-            List<Timestamp> pLastLogins) {
+            int ID,
+            String login,
+            String email,
+            String fullName,
+            String password,
+            Timestamp lastPasswordChange,
+            int status,
+            int privilege,
+            List<Timestamp> lastLogins) {
        
-        ID = pID;
-        login = pLogin;
-        email = pEmail;
-        fullName = pFullName;
-        password = pPassword;
-        lastPasswordChange = pLastPasswordChange;
-        setLastLogins(pLastLogins);
+        this.ID = ID;
+        this.login = login;
+        this.email = email;
+        this.fullName = fullName;
+        this.password = password;
+        this.lastPasswordChange = lastPasswordChange;
+        this.setLastLogins(lastLogins);
                 
-
-        status
-                = (pStatus == 1) ? UserStatus.ENABLED : UserStatus.DISABLED;
-        privilege
-                = (pPrivilege == 1) ? UserPrivilege.ADMIN : UserPrivilege.USER;
+        this.status
+                = (status == 1) ? UserStatus.ENABLED : UserStatus.DISABLED;
+        this.privilege
+                = (privilege == 1) ? UserPrivilege.ADMIN : UserPrivilege.USER;
     }
 
+    /**
+     * complete constructor with every parameter.
+     */
+    
     public User(
-            int pID,
-            String pLogin,
-            String pEmail,
-            String pFullName,
-            String pPassword,
-            Timestamp pLastPasswordChange,
-            UserStatus pStatus,
-            UserPrivilege pPrivilege,
-            List<Timestamp> pLastLogins) {
+            int ID,
+            String login,
+            String email,
+            String fullName,
+            String password,
+            Timestamp lastPasswordChange,
+            UserStatus status,
+            UserPrivilege privilege,
+            List<Timestamp> lastLogins) {
 
-        this.ID = pID;
-        this.login = pLogin;
-        this.email = pEmail;
-        this.fullName = pFullName;
-        this.password = pPassword;
-        this.lastPasswordChange = pLastPasswordChange;
-        this.status = pStatus;
-        this.privilege = pPrivilege;
-        setLastLogins(pLastLogins);
+        this.ID = ID;
+        this.login = login;
+        this.email = email;
+        this.fullName = fullName;
+        this.password = password;
+        this.lastPasswordChange = lastPasswordChange;
+        this.status = status;
+        this.privilege = privilege;
+        setLastLogins(lastLogins);
     }
 
     // Getters.
@@ -116,47 +135,52 @@ public class User implements Comparable<User>, Serializable {
         ID = iD;
     }
 
-    public void setLogin(String pLogin) {
-        login = pLogin;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public void setEmail(String pEmail) {
-        email = pEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setFullName(String pFullName) {
-        fullName = pFullName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public void setPassword(String pPassword) {
-        password = pPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setLastPasswordChange(Timestamp pLastPasswordChange) {
-        lastPasswordChange = pLastPasswordChange;
+    public void setLastPasswordChange(Timestamp lastPasswordChange) {
+        this.lastPasswordChange = lastPasswordChange;
     }
 
-    public void setStatus(UserStatus pStatus) {
-        status = pStatus;
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
-    public void setPrivilege(UserPrivilege pPrivilege) {
-        privilege = pPrivilege;
+    public void setPrivilege(UserPrivilege privilege) {
+        this.privilege = privilege;
     }
 
-    public void setLastLogins(List<Timestamp> pLastLogins) {
-        if (pLastLogins == null)
+    public void setLastLogins(List<Timestamp> lastLogins) {
+        if (lastLogins == null)
                lastLogins = new ArrayList <> ();
         
-        pLastLogins.sort((t1, t2) -> 
+        lastLogins.sort((t1, t2) -> 
                 t1.compareTo(t2));
                 
-        if (10 < pLastLogins.size())
-            pLastLogins.removeIf(t -> 
-                pLastLogins.indexOf(t) < pLastLogins.size() - 10);
+        if (10 < lastLogins.size())
+            for (int i = 0; 10 < lastLogins.size(); i++) 
+                lastLogins.remove(i);
 
-        lastLogins = pLastLogins;
+        this.lastLogins = lastLogins;
     }
+
+    /**
+     * @return every login date
+     * concatenated in a single String.
+     */
 
     private String lastLoginString() {
         String ls = "";
@@ -169,6 +193,11 @@ public class User implements Comparable<User>, Serializable {
         return ls;
     }
 
+    /**
+     * @return true if the login, email and type of user
+     * are equals, false if not
+     */
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof User)) 
@@ -180,20 +209,29 @@ public class User implements Comparable<User>, Serializable {
                 && privilege.equals(usr.getPrivilege());
     }
 
+    /**
+     * @return comparison of users.
+     * compares the users by their login
+     */
+
     @Override
     public int compareTo(User usr) {
-        return ID - usr.getID();
+        return this.login.compareTo(usr.getLogin());
     }
+
+    /**
+     * @return String with al the user data (used only for testing)
+     */
 
     @Override
     public String toString() {
-       return "ID: " + ID
-                + "\nLogin: " + login
-                + "\nEmail: " + email
-                + "\nFull Name: " + fullName
-                + "\nLast password change: " + lastPasswordChange
-                + "\nStatus: " + status
-                + "\nPrivilege: " + privilege
+       return "ID: " + this.ID
+                + "\nLogin: " + this.login
+                + "\nEmail: " + this.email
+                + "\nFull Name: " + this.fullName
+                + "\nLast password change: " + this.lastPasswordChange
+                + "\nStatus: " + this.status
+                + "\nPrivilege: " + this.privilege
                 + "\nLast login: " + lastLoginString();
     }
 }
