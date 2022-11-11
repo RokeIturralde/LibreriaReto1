@@ -6,6 +6,8 @@ import logic.objects.User;
 import logic.objects.message.types.ResponseType;
 
 /**
+ * sends a response to the client after
+ * the server has executed the instruction
  * @author dani
  */
 

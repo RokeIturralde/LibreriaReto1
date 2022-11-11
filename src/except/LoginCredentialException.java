@@ -3,6 +3,7 @@ package except;
 /**
  * @author roke
  */
+
 public class LoginCredentialException extends Exception {
 
     public LoginCredentialException() {

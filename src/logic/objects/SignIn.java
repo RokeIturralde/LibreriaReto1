@@ -3,6 +3,7 @@ package logic.objects;
 import java.sql.Timestamp;
 
 /**
+ * class that encapsulates the timestamp (useless)
  * @author dani
  */
 

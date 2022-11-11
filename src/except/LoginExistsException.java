@@ -1,6 +1,8 @@
 package except;
 
 /**
+ * exception thrown when the login
+ * already exists in the database.
  * @author dani
  */
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * class that stores the data of a user.
  * @author dani
  */
 

@@ -7,6 +7,13 @@ import except.ServerException;
 import logic.objects.User;
 import logic.objects.message.Response;
 
+/**
+ * this interface is implemented by the SQL
+ * reader class at server side (DBReaderImplementation) 
+ * and also by the server connector at client side.
+ * @author dani
+ */
+
 public interface IClientServer {
 
     /**

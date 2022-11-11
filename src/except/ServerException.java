@@ -1,7 +1,7 @@
 package except;
 
 /**
- * @author dani
+ * @author roke
  */
 
 public class ServerException extends Exception {

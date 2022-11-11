@@ -6,6 +6,8 @@ import logic.objects.User;
 import logic.objects.message.types.RequestType;
 
 /**
+ * object that contains a user and a petition,
+ * sent by the client and received by the server.
  * @author dani
  */
 
