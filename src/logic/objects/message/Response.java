@@ -5,17 +5,31 @@ import java.io.Serializable;
 import logic.objects.User;
 import logic.objects.message.types.ResponseType;
 
+/**
+ * sends a response to the client after
+ * the server has executed the instruction
+ * @author dani
+ */
+
 public class Response implements Serializable {
     private User user;
     private ResponseType responseType;
 
-    public Response(User pUser, ResponseType pResponseType) {
-        this.user = pUser;
-        this.responseType = pResponseType;
+    /**
+     * @param user User to be sent
+     * @param responseType status of the operation
+     */
+    
+    public Response(User user, ResponseType responseType) {
+        this.user = user;
+        this.responseType = responseType;
     }
 
-    public Response() {
-    }
+    /**
+     * empty constructor
+     */
+
+    public Response() {}
     
     // Getters.
     public User getUser() {
@@ -31,6 +45,4 @@ public class Response implements Serializable {
     public void setResponseType(ResponseType responseType) {
         this.responseType = responseType;
     }
-
-    
 }
