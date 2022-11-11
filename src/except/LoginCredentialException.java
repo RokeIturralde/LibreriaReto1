@@ -7,7 +7,7 @@ package except;
 
 /**
  *
- * @author 2dam
+ * @author Eneko
  */
 public class LoginCredentialException extends Exception {
 
